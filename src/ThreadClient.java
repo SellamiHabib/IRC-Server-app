@@ -35,15 +35,13 @@ class ThreadClient extends Thread {
         try {
             while (true) {
                 message = In.readLine();
-                if (message == ("exit")) {
+                if (message.equals("exit")) {
+                    serveur.SupprimerClient(this, nom);
                     serveur.EnvoyerListeClients();
                     serveur.EnvoyerATous("Deconnexion : " + getNom() + " a quitté le chat");
-                    In.close();
-                    Out.close();
-                    socket.close();
                     break;
                 }
-                if (message != null)
+                else
                     serveur.EnvoyerATous(getNom() + "> " + message);
             }
             serveur.SupprimerClient(this, nom);

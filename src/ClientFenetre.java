@@ -50,7 +50,6 @@ class ClientFenetre extends JFrame implements Runnable, ActionListener {
                                       Out.close();
                                       In.close();
                                       socketClient.close();
-                                      System.out.println("test");
                                   }
                                   catch (Exception e1) {
                                       e1.printStackTrace();
