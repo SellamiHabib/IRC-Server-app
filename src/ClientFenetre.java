@@ -129,15 +129,12 @@ class ClientFenetre extends JFrame implements Runnable, ActionListener {
                             }
                             UserList.append(message + "\n");
                         }
-                        if (message!=("EOF")) {
-                            break;
-                        }
-
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else if ((message != "" )) {
+                } else {
                     ServerOutput.append(message + "\n");
+                    System.out.println(message);
                 }
 
             }
