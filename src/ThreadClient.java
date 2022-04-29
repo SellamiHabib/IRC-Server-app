@@ -26,10 +26,9 @@ class ThreadClient extends Thread {
             }
             serveur.ajouterClient(this);
             serveur.EnvoyerATous("Connexion : " + this.getNom() + " a entré le chat");
-
             serveur.EnvoyerListeClients();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
         String message = "";
         try {
@@ -44,10 +43,7 @@ class ThreadClient extends Thread {
                 else
                     serveur.EnvoyerATous(getNom() + "> " + message);
             }
-            serveur.SupprimerClient(this, nom);
         } catch (Exception e) {
-            e.printStackTrace();
-        } catch (Throwable e) {
             e.printStackTrace();
         }
     }

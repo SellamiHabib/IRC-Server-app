@@ -13,7 +13,6 @@ class ServeurIRC {
         new ServeurIRC(port);
 
     }
-
     public ServeurIRC(int port) {
         V = new Vector<ThreadClient>();
         try {
@@ -24,11 +23,8 @@ class ServeurIRC {
                     Socket socket = server.accept();
                     BufferedReader In = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                     PrintWriter Out = new PrintWriter(socket.getOutputStream(), true);
-
                     nbClient++;
-
                     ThreadClient c = new ThreadClient(socket, this, In, Out);
-
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
@@ -49,7 +45,6 @@ class ServeurIRC {
         }
     }
 
-
     synchronized public void EnvoyerListeClients() {
         //...(envoyer dans out le nom de tous les clients du vecteur V)
         EnvoyerATous("!LIST");
@@ -61,12 +56,9 @@ class ServeurIRC {
             }
         }
     }
-
     synchronized public void SupprimerClient(ThreadClient c, String nom) {
         // supprimer le client
         V.removeElement(c);
 
     }
-
-
 }

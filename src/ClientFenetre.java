@@ -38,7 +38,7 @@ class ClientFenetre extends JFrame implements Runnable, ActionListener {
     ClientFenetre(InetAddress hote, int port) {
         // PARTIE FRONT END
         super("IRC Chat");
-        setSize(600, 700);
+        setSize(300, 300);
         setLayout(new BorderLayout());
         Container container = getContentPane();
 
@@ -46,7 +46,6 @@ class ClientFenetre extends JFrame implements Runnable, ActionListener {
                               public void windowClosing(WindowEvent e) {
                                   try{
                                       Out.println("exit");
-
                                       Out.close();
                                       In.close();
                                       socketClient.close();
@@ -64,7 +63,7 @@ class ClientFenetre extends JFrame implements Runnable, ActionListener {
         JPanel P_north = new JPanel(new FlowLayout(FlowLayout.CENTER));
         welcome_label = new JLabel("Serveur IRC");
         P_north.add(welcome_label);
-        P_north.setSize(500, 100);
+        P_north.setSize(300, 100);
         container.add(P_north, BorderLayout.NORTH);
 
         //South Panel
@@ -88,10 +87,9 @@ class ClientFenetre extends JFrame implements Runnable, ActionListener {
         container.add(P_south, BorderLayout.SOUTH);
 
         //Center Panel
-        ServerOutput = new TextArea(30, 100);
+        ServerOutput = new TextArea(30, 50);
         container.add(ServerOutput, BorderLayout.CENTER);
         ServerOutput.setEditable(false);
-        ServerOutput.setBackground(new Color(255, 255, 255));
 
         UserList = new TextArea(20, 20);
         container.add(UserList, BorderLayout.EAST);
@@ -99,23 +97,22 @@ class ClientFenetre extends JFrame implements Runnable, ActionListener {
         UserList.setFocusable(false);
 
         pack();
-        this.setMinimumSize(new Dimension(getWidth(), getHeight()));
 
         setVisible(true);
         Input.requestFocus();
 
-        // PARTIE CONNEXION AVEC LE  SERVEUR
         try {
             socketClient = new Socket(hote, port);
             In = new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
             Out = new PrintWriter(socketClient.getOutputStream(), true);
             ServerOutput.append("Connexion avec le serveur établi\n");
             ServerOutput.append("Donner votre nom :\n");
+            String message = "";
 
             while (this.nom.equals("")) {
                 this.nom = In.readLine();
             }
-            String message = "";
+
             while (true) {
                 message = In.readLine();
                 if (message.equals("!LIST")) {
@@ -131,10 +128,9 @@ class ClientFenetre extends JFrame implements Runnable, ActionListener {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else {
+                } else
                     ServerOutput.append(message + "\n");
-                    System.out.println(message);
-                }
+
 
             }
         } catch (Exception e) {
@@ -146,11 +142,9 @@ class ClientFenetre extends JFrame implements Runnable, ActionListener {
         // Lancement du Thread
         Thread t = new Thread(this);
         t.start();
-
     }
 
     public void run() {
-
     }
 
     public void actionPerformed(ActionEvent e) {
