@@ -73,11 +73,11 @@ class ClientFenetre extends JFrame implements Runnable, ActionListener {
         Input.addActionListener(this);
         Input.setEnabled(true);
 
-        ImageIcon send_img = new ImageIcon("src/send.png");
+        ImageIcon send_img = new ImageIcon("assets/send.png");
         send_button = new JButton(send_img);
         send_button.addActionListener(this);
 
-        ImageIcon clear_img = new ImageIcon("src/clear.png");
+        ImageIcon clear_img = new ImageIcon("assets/clear.png");
         clear_button = new JButton(clear_img);
         clear_button.addActionListener(this);
 
